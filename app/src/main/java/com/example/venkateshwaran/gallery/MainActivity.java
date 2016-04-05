@@ -41,16 +41,11 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity  implements  AdapterView.OnItemClickListener{
 
-            private int count;
-            private Bitmap[] thumbnails;
-            private boolean[] thumbnailsselection;
-            private String[] arrPath;
-            private ImageAdapter imageAdapter;
-            ArrayList<image> f = new ArrayList<image>();ArrayList<String> r = new ArrayList<String>();
-            File[] listFile;
-    GridView imagegrid;
 
-            /** Called when the activity is first created. */
+            private ImageAdapter imageAdapter;
+            ArrayList<image> f = new ArrayList<image>();
+            GridView imagegrid;
+
             @Override
             public void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
@@ -77,20 +72,13 @@ public class MainActivity extends Activity  implements  AdapterView.OnItemClickL
         startActivity(myIntent);
 
     }
-    final Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message message) {
 
-
-
-        }
-    };
 
     public void getFromSdcard()
             {
-                File file= new File(android.os.Environment.getExternalStorageDirectory(),"/Pictures/Saved Pictures");
+             /*   File file= new File(android.os.Environment.getExternalStorageDirectory(),"/Pictures/Saved Pictures");
 
-             /*   if (file.isDirectory())
+                if (file.isDirectory())
                 {
                     listFile = file.listFiles();
 
@@ -115,7 +103,6 @@ public class MainActivity extends Activity  implements  AdapterView.OnItemClickL
                     do {
                         String thisId = musicCursor.getString(idColumn);
                         int column_index = musicCursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                     //   f.add(musicCursor.getString(column_index));
                         f.add(new image(musicCursor.getString(column_index), thisId));
                         Log.e("ewfewfef", "  " + musicCursor.getString(column_index));
 
@@ -129,11 +116,6 @@ public class MainActivity extends Activity  implements  AdapterView.OnItemClickL
                     });
 
 
-                  //  Arrays.sort(, new Comparator<File>() {
-                    //    public int compare(File f1, File f2) {
-                      //      return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
-                        //}
-                    //});
                 }
                 
             }
@@ -222,7 +204,7 @@ public class MainActivity extends Activity  implements  AdapterView.OnItemClickL
     public int calculateInSampleSize(
 
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Raw height and width of image
+
         final int height = options.outHeight;
         final int width = options.outWidth;
         int inSampleSize = 1;
