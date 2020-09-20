@@ -28,52 +28,48 @@ import java.util.concurrent.TimeUnit;
 public class viewimage extends Activity {
     ArrayList<image> f = new ArrayList<image>();
     ImageView y;
-    private Button b1,b2;
+    private Button b1, b2;
     int position;
     Bitmap bmp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewimage);
         Intent i = getIntent();
-         position = i.getExtras().getInt("i");
-         f = (ArrayList<image>)getIntent().getSerializableExtra("e");
-
-       y = (touchimageview) findViewById(R.id.img);
+        position = i.getExtras().getInt("i");
+        f = (ArrayList<image>) getIntent().getSerializableExtra("e");
+        y = (touchimageview) findViewById(R.id.img);
         b2 = (Button) findViewById(R.id.button);
-
-        b1 =(Button)findViewById(R.id.button2);
-
-
-
-         bmp = BitmapFactory.decodeFile(f.get(position).getTitle());
-
-
+        b1 = (Button) findViewById(R.id.button2);
+        bmp = BitmapFactory.decodeFile(f.get(position).getTitle());
         y.setImageBitmap(bmp);
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(position>0) position--;
+                if (position > 0) position--;
 
                 bmp = BitmapFactory.decodeFile(f.get(position).getTitle());
 
 
                 y.setImageBitmap(bmp);
 
-            }});
+            }
+        });
+
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(position<f.size())position++;
+                if (position < f.size()) position++;
 
                 bmp = BitmapFactory.decodeFile(f.get(position).getTitle());
 
 
                 y.setImageBitmap(bmp);
 
-            }});
-
-
+            }
+        });
     }
 
     @Override
@@ -85,18 +81,9 @@ public class viewimage extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
-
-
 }

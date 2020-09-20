@@ -28,16 +28,12 @@ import android.widget.OverScroller;
 import android.widget.Scroller;
 import android.widget.Toast;
 
-public class touchimageview extends ImageView {
-
+public class touchimageview extends android.support.v7.widget.AppCompatImageView {
     private static final String DEBUG = "DEBUG";
 
-    //
     // SuperMin and SuperMax multipliers. Determine how much the image can be
     // zoomed below or above the zoom boundaries, before animating back to the
     // min/max zoom boundary.
-    //
-
     public final static int SWIPE_UP = 1;
     public final static int SWIPE_DOWN = 2;
     public final static int SWIPE_LEFT = 3;
@@ -46,7 +42,7 @@ public class touchimageview extends ImageView {
     public final static int MODE_SOLID = 1;
     public final static int MODE_DYNAMIC = 2;
 
-    private final static int ACTION_FAKE = -13; // just an unlikely number
+    private final static int ACTION_FAKE = -13;
     private int swipe_Min_Distance = 50;
     private int swipe_Max_Distance = 350;
     private int swipe_Min_Velocity = 100;
@@ -55,55 +51,34 @@ public class touchimageview extends ImageView {
     private boolean running = true;
     private boolean tapIndicator = false;
 
-
-
     private GestureDetector detector;
-    //private  OnTouchImageViewListene listener;
     private static final float SUPER_MIN_MULTIPLIER = .75f;
     private static final float SUPER_MAX_MULTIPLIER = 1.25f;
 
-    //
     // Scale of image ranges from minScale to maxScale, where minScale == 1
     // when the image is stretched to fit view.
-    //
     private float normalizedScale;
 
-    //
     // Matrix applied to image. MSCALE_X and MSCALE_Y should always be equal.
     // MTRANS_X and MTRANS_Y are the other values used. prevMatrix is the matrix
     // saved prior to the screen rotating.
-    //
-    private Matrix matrix, prevMatrix;
 
+    private Matrix matrix, prevMatrix;
     private static enum State { NONE, DRAG, ZOOM, FLING, ANIMATE_ZOOM };
     private State state;
-
     private float minScale;
     private float maxScale;
     private float superMinScale;
     private float superMaxScale;
     private float[] m;
-
     private Context context;
     private Fling fling;
-
     private ScaleType mScaleType;
-
     private boolean imageRenderedAtLeastOnce;
     private boolean onDrawReady;
-
     private ZoomVariables delayedZoomVariables;
-
-    //
-    // Size of view and previous view size (ie before rotation)
-    //
     private int viewWidth, viewHeight, prevViewWidth, prevViewHeight;
-
-    //
-    // Size of image when it is stretched to fit view. Before and After rotation.
-    //
     private float matchViewWidth, matchViewHeight, prevMatchViewWidth, prevMatchViewHeight;
-
     private ScaleGestureDetector mScaleDetector;
     private GestureDetector mGestureDetector;
     private GestureDetector.OnDoubleTapListener doubleTapListener = null;
@@ -196,7 +171,6 @@ public class touchimageview extends ImageView {
         }
         if (type == ScaleType.MATRIX) {
             super.setScaleType(ScaleType.MATRIX);
-
         } else {
             mScaleType = type;
             if (onDrawReady) {
